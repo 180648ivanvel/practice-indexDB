@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/form.css">
+    <link rel="manifest" href="manifest.webmanifest">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+    <title>Formulario Registro</title>
+</head>
+
+<body>
+    <div class="contenido">
+        <form class="form-register" id="form">
+            <h4>Registra tu cita</h4>
+                <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingrese su Nombre">
+                <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Ingrese su Apellido">
+                <input class="controls" type="textarea" name="razon" id="razon" placeholder="Motivo de la consulta">
+                <input class="controls" type="tel" name="tel" id="phone" placeholder="Numero de contacto" maxlength="10" minlength="10">
+            <h5>Selecciona la fecha y la hora para tu cita</h5>
+                <input class="controls" type="date" name="fecha" id="fecha">
+                <input class="controls" type="time" name="hora" id="hora">
+            <p>Estoy de acuerdo con <a href="#">Terminos y Condiciones</a></p> <br>
+            <button class="button" type="submit" name="botons">Enviar</button>
+            <p><a href="index.html">Regresar al inicio</a></p>
+            <script src='js/indexedDB.js'></script>
+        </form>
+        <div class="alert alert-info" style="display: none;"></div>
+    </div>
+</body>
+<script>
+    const phoneInputField = document.querySelector("#phone");
+    const phoneInput = window.intlTelInput(phoneInputField, {
+        preferredCountries: ["mx","us"],
+        utilsScript:
+            "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js", 
+        });
+    const info = document.querySelector(".alert-info");
+
+    function process(event) {
+    event.preventDefault();
+
+    const phoneNumber = phoneInput.getNumber();
+
+    info.style.display = "";
+    info.innerHTML = `Phone number in E.164 format: <strong>${phoneNumber}</strong>`;
+    }
+  </script>
+
+</html>
